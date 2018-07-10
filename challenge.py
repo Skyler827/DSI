@@ -28,7 +28,6 @@ def question2() -> None:
     Create a histogram that shows the distribution for number of backers.
     """
 
-    # Fixing random state for reproducibility
     csvfile = open("DSI_kickstarterscrape_dataset.csv", errors="replace")
     data = csv.DictReader(csvfile, delimiter=',')
     max_backers = 0
@@ -73,6 +72,9 @@ def question2() -> None:
     plt.title('Histogram of Kickstarter Backers')
     plt.axis([1, max_backers, 1, max(histogram_values)])
     plt.grid(True)
+    try:
+        os.makedirs("output")
+    except: pass
     plt.savefig(os.path.join("output", "question2a_histogram.png"))
 
     # question2b() -> None:
