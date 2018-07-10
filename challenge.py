@@ -4,6 +4,8 @@ import numpy as np
 import csv
 import statistics
 import math
+import os
+from scipy.stats import skew
 
 def question1() -> None:
     """ Question 1:
@@ -21,7 +23,7 @@ def question1() -> None:
             pledge_amount.append(0)
     print(f"Mean pledge amount: {statistics.mean(pledge_amount)}")
     
-def question2a() -> None:
+def question2() -> None:
     """ Question 2:
     Create a histogram that shows the distribution for number of backers.
     """
@@ -65,19 +67,19 @@ def question2a() -> None:
     #print(len(bucket_limits))
     n, bins, patches = plt.hist(histogram_values, bins=bucket_limits,facecolor='g', alpha=0.75, log=True)
     plt.gca().set_xscale("log")
-
+    
     plt.xlabel('Number of backers')
     plt.ylabel('Number of campaigns')
     plt.title('Histogram of Kickstarter Backers')
     plt.axis([1, max_backers, 1, max(histogram_values)])
     plt.grid(True)
-    plt.show()
+    plt.savefig(os.path.join("output", "question2a_histogram.png"))
 
-def question2b() -> None:
+    # question2b() -> None:
     """
     What is the skew of the distribution?*
     """
-    pass
+    print(f"The skew of the distribution is {skew(backer_values)}")
 def question3a() -> None:
     """Question 3:
     Is the ‘duration’ variable normally distributed?*
@@ -103,8 +105,7 @@ Be sure to consider the following:
 
 def main() -> None:
     question1()
-    question2a()
-    question2b()
+    question2()
     question3a()
     question3b()
 main()
