@@ -2,6 +2,7 @@ import os
 import csv
 from typing import List, Dict
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def goal_vs_time() -> None:
@@ -22,7 +23,11 @@ def goal_vs_time() -> None:
         else:
             color.append('black')
     csvfile.close()
-    plt.scatter(project_durations, project_goals, color=color)
+
+    ## The following code is broken
+    ## I suspect due to this bug:
+    ## https://github.com/matplotlib/matplotlib/issues/10648
+    plt.scatter(np.array(project_durations), np.array(project_goals), alpha=0.5, color=color)
     plt.xlabel('Days in campaign')
     plt.ylabel('Project Goal')
     plt.title('Project Goals vs length of time')
@@ -34,7 +39,6 @@ def goal_vs_time() -> None:
     file_path = os.path.join("output", "goals_vs_time_scatter.png")
     plt.savefig(file_path)
     plt.clf()
-
 
 def part2() -> None:
     goal_vs_time()
