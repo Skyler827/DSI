@@ -19,7 +19,8 @@ def question1() -> None:
         try:
             pledge_amount.append(int(row['pledged']))
         except:
-            print(f"Warning: couldn't append pledge value: \"{row['pledged']}\" for project {row['name']}")
+            if row['pledged'] == "":
+                print(f"Warning: empty string for pledged value, recording zero instead (project {row['name']})")
             pledge_amount.append(0)
     print(f"Mean pledge amount: {statistics.mean(pledge_amount)}")
     
