@@ -6,6 +6,7 @@ import statistics
 import math
 import os
 from scipy.stats import skew
+from challenge_part2 import part2 
 
 def question1() -> None:
     """ Question 1:
@@ -23,6 +24,8 @@ def question1() -> None:
                 print(f"Warning: empty string for pledged value, recording zero instead (project {row['name']})")
             pledge_amount.append(0)
     print(f"Mean pledge amount: {statistics.mean(pledge_amount)}")
+    csvfile.close()
+    
     
 def question2() -> None:
     """ Question 2:
@@ -42,6 +45,7 @@ def question2() -> None:
         backer_values.append(curr_backers)
         if curr_backers > max_backers:
             max_backers = curr_backers
+    csvfile.close()
     print(f"Max backers: {max_backers}")
     list.sort(backer_values)
     bucket_limits:List[int] = [0]
@@ -77,7 +81,7 @@ def question2() -> None:
         os.makedirs("output")
     except: pass
     plt.savefig(os.path.join("output", "question2a_histogram.png"))
-
+    plt.clf()
     # question2b() -> None:
     """
     What is the skew of the distribution?*
@@ -90,7 +94,7 @@ def question3a() -> None:
     answer = "while I recognize that this is a hypothesis testing question, " + \
     "I'm going to skip this for now by just saying yes " + \
     "even though I know I could show my work, once I review exactly how"
-    if answer[0] == "w" : print('') # to make my linter be quiet about the unused variable
+    print(answer)
 def question3b() -> None:
     """
     If you could collect data on another attribute of these projects, 
@@ -98,7 +102,7 @@ def question3b() -> None:
     """
     answer = "I would collect a breakdown of how many people paid each of the "+\
     "different pledge amounts"
-
+    print(answer)
 """
 
 *Part 2: Qualitative Analysis
@@ -112,9 +116,7 @@ Be sure to consider the following:
 -  What type of projects would be most successful at getting funded?
 -  Is there an ideal month/day/time to launch a campaign?
 """
-def part2() -> None:
-    csvfile = open("DSI_kickstarterscrape_dataset.csv", errors="replace")
-    data = csv.DictReader(csvfile, delimiter=',')
+
 
 
 def main() -> None:
